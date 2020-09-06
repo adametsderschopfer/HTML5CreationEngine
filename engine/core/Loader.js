@@ -38,6 +38,22 @@
       this.loadOrder.jsons.push({ name, address });
     }
 
+    getImage(searchedName) {
+      if (this.resources.images.hasOwnProperty(searchedName)) {
+        return this.resources.images[searchedName];
+      } else {
+        return new Error("Image not found. Try to enter valid file name!\n");
+      }
+    }
+
+    getJson(searchedName) {
+      if (this.resources.jsons.hasOwnProperty(searchedName)) {
+        return this.resources.jsons[searchedName];
+      } else {
+        return new Error("Json not found. Try to enter valid file name!\n");
+      }
+    }
+
     load(callback) {
       const promises = [];
 
