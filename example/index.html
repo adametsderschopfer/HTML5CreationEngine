@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Battle city</title>
+  </head>
+  <body>
+    <script src="engine/core/Loader.js"></script>
+
+    <script>
+      const { Loader } = GameEngine;
+      Loader.loadImage("static/persik.png");
+
+      const loader = new Loader()
+
+      loader.addImage('persik', "static/persik.png");
+      loader.addJson("presons", "static/persons.json")
+      loader.load()
+ 
+     
+    </script>
+  </body>
+</html>
