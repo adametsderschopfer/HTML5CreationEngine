@@ -25,8 +25,8 @@
       };
 
       this.resources = {
-        images: [],
-        jsons: [],
+        images: {},
+        jsons: {},
       };
     }
 
