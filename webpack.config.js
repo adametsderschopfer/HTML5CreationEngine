@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
 	entry: {
 		GameEngine: './engine/index.js',
-		app: './game/index.js'
+		app: './example/index.js'
 	},
 	output: {
 		filename: '[name].js',
