@@ -1,0 +1,37 @@
+{
+  "name": "html5creationengine",
+  "version": "1.0.0",
+  "description": "Engine on javascript",
+  "scripts": {
+    "test": "jest",
+    "serve": "webpack-dev-server --mode development",
+    "nodemon": "nodemon --exec babel-node server.js",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adametsofficial/HTML5CreationEngine.git"
+  },
+  "keywords": [
+    "js",
+    "engine"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/runtime": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "author": "Adametsofficial <av.styledev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adametsofficial/HTML5CreationEngine/issues"
+  },
+  "homepage": "https://github.com/adametsofficial/HTML5CreationEngine#readme"
+}
