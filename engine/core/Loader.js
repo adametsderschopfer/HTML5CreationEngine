@@ -22,11 +22,13 @@
       this.loadOrder = {
         images: [],
         jsons: [],
+        sounds: [],
       };
 
       this.resources = {
         images: {},
         jsons: {},
+        sounds: {},
       };
     }
 
@@ -36,6 +38,9 @@
 
     addJson(name, address) {
       this.loadOrder.jsons.push({ name, address });
+    }
+    addSound(name, src) {
+      this.loadOrder.sounds.push({ name, src });
     }
 
     getImage(searchedName) {
@@ -52,6 +57,9 @@
       } else {
         return new Error("Json not found. Try to enter valid file name!\n");
       }
+    }
+    getSound(name) {
+      return this.resources.sounds[name];
     }
 
     load(callback) {
@@ -86,6 +94,21 @@
 
         promises.push(promise);
       }
+      
+      for (const soundData of this.loadOrder.sounds) {
+        const { name, src } = soundData;
+
+        const promise = Loader.loadSound(src).then((audio) => {
+          this.resources.sounds[name] = audio;
+
+          if (this.loadOrder.sounds.includes(soundData)) {
+            const index = this.loadOrder.sounds.indexOf(soundData);
+            this.loadOrder.sounds.splice(index, 1);
+          }
+        });
+
+        promises.push(promise);
+      }
 
       Promise.all(promises).then(callback);
     }
@@ -108,6 +131,17 @@
           .then((result) => result.json())
           .then((json) => resolve(json))
           .catch((error) => reject(error));
+      });
+    }
+    static loadSound(src) {
+      return new Promise((resolve, reject) => {
+        try {
+          const audio = new Audio();
+          audio.addEventListener("canplaythrough", () => resolve(audio));
+          audio.src = src;
+        } catch (error) {
+          reject(error);
+        }
       });
     }
   }

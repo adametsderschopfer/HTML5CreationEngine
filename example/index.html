@@ -6,20 +6,35 @@
   </head>
   <body>
     <script src="../engine/core/Loader.js"></script>
+    <script src="../engine/core/Renderer.js"></script>
+    <script src="../engine/core/Store.js"></script>
 
     <script>
-      const { Loader } = GameEngine;
+      const { Loader, Renderer } = GameEngine;
       Loader.loadImage("static/persik.png");
 
-      const loader = new Loader()
+      const loader = new Loader();
+      const renderer = new Renderer({
+        width: 500,
+        height: 500,
+        background: "gray",
+        update(timestamp) {
+          this.draw((canv, ctx) => {
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(100, 100, 5, 0, Math.PI * 2);
+            ctx.fill();
+          });
+        },
+      });
 
-      loader.addImage('persik1', "static/persik.png");
-      loader.addImage('persik', "static/persik.png");
-      loader.addJson("presons1", "static/persons.json")
-      loader.addJson("presons", "static/persons.json")
-      loader.load()
- 
-     
+      loader.addImage("persik1", "static/persik.png");
+      loader.addImage("persik", "static/persik.png");
+      loader.addJson("presons1", "static/persons.json");
+      loader.addJson("presons", "static/persons.json");
+      loader.load();
+      // Renderer example
+      document.body.append(renderer.canvas);
     </script>
   </body>
 </html>
