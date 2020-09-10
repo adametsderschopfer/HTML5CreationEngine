@@ -68,7 +68,7 @@ function combineReducers(reducersMap) {
 // }
 
 export { createStore, combineReducers };
-export default Store;
+export default Store; 
 
 // const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 // const reducer = (state = { is: false }, action) => {
