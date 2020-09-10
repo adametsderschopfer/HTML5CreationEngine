@@ -44,5 +44,42 @@ function combineReducers(reducersMap) {
   };
 }
 
+// function thunk(store) {
+//   return (dispatch) => (action) => {
+//     if (typeof action === "function") {
+//       return action(store.dispatch, store.getState);
+//     }
+//     return dispatch(action);
+//   };
+// }
+
+// function applyMiddleware(middleware) {
+//   return function createStoreWithMiddleware(createStore) {
+//     return (reducer) => {
+//       const store = createStore(reducer);
+//       return {
+//         dispatch: (action) => {
+//           return middleware(store)(store.dispatch)(action)
+//         },
+//         getState: store.getState,
+//       };
+//     };
+//   };
+// }
+
 export { createStore, combineReducers };
 export default Store;
+
+// const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+// const reducer = (state = { is: false }, action) => {
+//   switch (action.type) {
+//     case "trfs": {
+//       return { ...state, is: !state.is };
+//     }
+
+//     default: {
+//       return state;
+//     }
+//   }
+// };
+// const store = createStoreWithMiddleware(reducer);
