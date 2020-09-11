@@ -7,10 +7,12 @@
   <body>
     <script src="../engine/core/Loader.js"></script>
     <script src="../engine/core/Renderer.js"></script>
-    <script src="../engine/core/Store.js"></script>
+    <script src="../engine/Sprite.js"></script>
+    <script src="../engine/Container.js"></script>
 
     <script>
-      const { Loader, Renderer } = GameEngine;
+      let sprite = null;
+      const { Loader, Renderer, Sprite } = GameEngine;
       Loader.loadImage("static/persik.png");
 
       const loader = new Loader();
@@ -18,21 +20,38 @@
         width: 500,
         height: 500,
         background: "gray",
+        canvasStyle: {
+          border: "5px solid",
+        },
         update(timestamp) {
-          this.draw((canv, ctx) => {
-            ctx.fillStyle = "black";
-            ctx.beginPath();
-            ctx.arc(100, 100, 5, 0, Math.PI * 2);
-            ctx.fill();
-          });
+          if (!sprite) {
+            return;
+          }
+          // sprite.x = this.canvas.width / 5 + 100 * Math.cos(timestamp / 100);
+          // sprite.y = this.canvas.height / 5 + 100 * Math.sin(timestamp / 100);
+
+          // sprite.frame.x =
+          //   this.canvas.width / 4 + 100 * Math.cos(timestamp / 100);
+          // sprite.frame.y =
+          //   this.canvas.height / 4 + 100 * Math.sin(timestamp / 100);
         },
       });
 
-      loader.addImage("persik1", "static/persik.png");
       loader.addImage("persik", "static/persik.png");
-      loader.addJson("presons1", "static/persons.json");
       loader.addJson("presons", "static/persons.json");
-      loader.load();
+      loader.load(() => {
+        sprite = new Sprite(loader.getImage("persik"), {
+          scale: 0.5,
+          anchorX: 0.5,
+          anchorY: 0.5,
+        });
+        sprite.absoluteX = 0
+        sprite.absoluteY = 0
+        renderer.stage.add(sprite);
+
+        // sprite.width = 400;
+        // sprite.height = 400;
+      });
       // Renderer example
       document.body.append(renderer.canvas);
     </script>
