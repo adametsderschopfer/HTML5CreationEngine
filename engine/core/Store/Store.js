@@ -5,7 +5,7 @@
 import Dispatcher from "./Dispatcher";
 
 class Store extends Dispatcher {
-  constructor(reducer = () => {}, initialState = {}) {
+  constructor(reducer = () => ({}), initialState = {}) {
     super();
     this.reducer = reducer;
     this.state = initialState || {};
@@ -21,4 +21,6 @@ function createStore(reducer, initialState) {
   return new Store(reducer, initialState);
 }
 
-export default { Store, createStore };
+const { combineReducers } = Store;
+
+export { combineReducers, createStore };

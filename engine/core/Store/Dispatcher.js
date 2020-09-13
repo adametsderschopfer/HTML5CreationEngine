@@ -6,6 +6,10 @@ class Dispatcher extends auxiliary.AuxiliaryFunctionsForStore {
   }
 
   dispatch(action) {
+    if (typeof action === "function") {
+      return action(this.dispatch)
+    }
+
     this.state = this.reducer(this.state, action);
     this.listeners.forEach((listener) => listener(this.state));
   }
