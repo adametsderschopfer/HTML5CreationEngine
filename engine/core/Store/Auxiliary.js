@@ -10,37 +10,34 @@ class AuxiliaryFunctionsForStore {
     };
   }
 
-  static applyMiddleware(...middleware) {
+  static applyMiddleware(...middlewares) {
     return function createStoreWithMiddlewares(createStore) {
       return (reducer, initialState) => {
-        
-      }
-    } 
+        const store = createStore(reducer, initialState);
+
+        return {
+          dispatch: (action) => {
+            return middlewares.forEach((middleware) => {
+              return middleware(store)(store.dispatch)(action);
+            });
+          },
+          this: store,
+        };
+      };
+    };
   }
-} 
 
-// function thunk(store) {
-//   return (dispatch) => (action) => {
-//     if (typeof action === "function") {
-//       return action(store.dispatch, store.getState);
-//     }
-//     return dispatch(action);
-//   };
-// }
+  thunk = (store) => (dispatch) => (action) => {
+    if (typeof action === "function") {
+      return action(store.dispatch);
+    }
 
-// function applyMiddleware(middleware) {
-//   return function createStoreWithMiddleware(createStore) {
-//     return (reducer) => {
-//       const store = createStore(reducer);
-//       return {
-//         dispatch: (action) => {
-//           return middleware(store)(store.dispatch)(action)
-//         },
-//         getState: store.getState,
-//       };
-//     };
-//   };
-// }
+    return dispatch(action);
+  };
 
+  middlewares = {
+    thunk: this.thunk,
+  };
+}
 
-export default { AuxiliaryFunctionsForStore }
+export default { AuxiliaryFunctionsForStore };
