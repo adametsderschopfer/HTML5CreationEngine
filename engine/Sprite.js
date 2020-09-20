@@ -3,7 +3,7 @@
 
   class Sprite extends GameEngine.DisplayObject {
     constructor(texture, args = {}) {
-      super()
+      super(args);
 
       this.texture = texture;
 
@@ -16,53 +16,21 @@
         height: frame.height || texture.height,
       };
 
-      if (args.scale !== undefined) {
-        this.setScale(args.scale);
+      if (args.width === undefined) {
+        this.width = this.frame.width;
+      }
+
+      if (args.height === undefined) {
+        this.height = this.frame.height;
       }
     }
 
-    setScale(value) {
-      this.scaleX = value;
-      this.scaleY = value;
-    }
-
-    get absoluteX() {
-      return this.x - this.anchorX * this.width;
-    }
-
-    set absoluteX(value) {
-      this.x = value + this.anchorX * this.width;
-      return value;
-    }
-
-    get absoluteY() {
-      return this.y - this.anchorY * this.height;
-    }
-
-    set absoluteY(value) {
-      this.y = value + this.anchorY * this.height;
-      return value;
-    }
-
-    get scaleX() {
-      return this.width / this.frame.width;
-    }
-
-    set scaleX(value) {
-      this.width = this.frame.width * value;
-      return value;
-    }
-
-    get scaleY() {
-      return this.height / this.frame.height;
-    }
-
-    set scaleY(value) {
-      this.height = this.frame.height * value;
-      return value;
-    }
-
-    draw(canvas, context) {
+    draw(_, context) {
+      context.save();
+      context.translate(this.x, this.y);
+      context.rotate(this.rotation);
+      context.scale(this.scaleX, this.scaleY);
+  
       context.drawImage(
         // сама текстура
         this.texture,
@@ -72,11 +40,14 @@
         this.frame.width,
         this.frame.height,
         // то где нужно отобразить
-        this.absoluteX,
-        this.absoluteY,
+        this.absoluteX - this.x,
+        this.absoluteY - this.y,
         this.width,
         this.height
       );
+
+  
+      context.restore();
     }
   }
 
