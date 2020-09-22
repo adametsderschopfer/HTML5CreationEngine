@@ -26,28 +26,29 @@
     }
 
     draw(_, context) {
-      context.save();
-      context.translate(this.x, this.y);
-      context.rotate(this.rotation);
-      context.scale(this.scaleX, this.scaleY);
-  
-      context.drawImage(
-        // сама текстура
-        this.texture,
-        // то что нужно отобразить
-        this.frame.x,
-        this.frame.y,
-        this.frame.width,
-        this.frame.height,
-        // то где нужно отобразить
-        this.absoluteX - this.x,
-        this.absoluteY - this.y,
-        this.width,
-        this.height
-      );
+      super.draw(() => {
+        context.save();
+        context.translate(this.x, this.y);
+        context.rotate(this.rotation);
+        context.scale(this.scaleX, this.scaleY);
 
-  
-      context.restore();
+        context.drawImage(
+          // сама текстура
+          this.texture,
+          // то что нужно отобразить
+          this.frame.x,
+          this.frame.y,
+          this.frame.width,
+          this.frame.height,
+          // то где нужно отобразить
+          this.absoluteX - this.x,
+          this.absoluteY - this.y,
+          this.width,
+          this.height
+        );
+
+        context.restore();
+      });
     }
   }
 
