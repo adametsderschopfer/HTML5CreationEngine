@@ -20,6 +20,7 @@
       this.scaleY = args.scaleY || 1;
 
       this.parent = null;
+      this.visible = true;
 
       if (args.scale !== undefined) {
         this.setScale(args.scale);
@@ -60,9 +61,15 @@
       }
     }
 
-    draw() {}
-  }
+    draw(callback) {
+      if (this.visible) {
+        callback();
+        return;
+      }
 
+      return;
+    }
+  }
   window.GameEngine = window.GameEngine || {};
   window.GameEngine.DisplayObject = DisplayObject;
 })();
