@@ -24,16 +24,18 @@
     }
 
     draw(canvas, context) {
-      context.save();
-      context.translate(this.x, this.y);
-      context.rotate(this.rotation);
-      context.scale(this.scaleX, this.scaleY);
+      super.draw(() => {
+        context.save();
+        context.translate(this.x, this.y);
+        context.rotate(this.rotation);
+        context.scale(this.scaleX, this.scaleY);
 
-      for (let dispalyObject of this.dispalyObjects) {
-        dispalyObject.draw(canvas, context);
-      }
+        for (let dispalyObject of this.dispalyObjects) {
+          dispalyObject.draw(canvas, context);
+        }
 
-      context.restore();
+        context.restore();
+      });
     }
   }
 
