@@ -3,8 +3,11 @@
 
   class Game {
     constructor(args = {}) {
-      this.width = args.width || {};
-      this.height = args.height | {};
+      this.renderer = new GameEngine.Renderer(args);
+
+      if (args.el && args.el.appendChild) {
+        args.el.appendChild(this.renderer.canvas);
+      }
     }
   }
 
