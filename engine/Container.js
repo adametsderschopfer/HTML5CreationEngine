@@ -33,7 +33,7 @@
         for (let dispalyObject of this.dispalyObjects) {
           dispalyObject.draw(canvas, context);
         }
-
+ 
         context.restore();
       });
     }
