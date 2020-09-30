@@ -51,14 +51,15 @@
     }
 
     setParent(parent) {
-      if (this.parent) {
+      if (this.parent && this.parent.remove) {
         this.parent.remove(this);
       }
 
-      if (parent) {
+      if (parent && parent.add) {
         parent.add(this);
-        this.parent = parent;
       }
+      
+      this.parent = parent;
     }
 
     draw(callback) {
