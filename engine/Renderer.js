@@ -12,9 +12,8 @@
 
       this.canvas.width = args.width || 50;
       this.canvas.height = args.height || 50;
-      this.update = args.update || function () {};
-      this.canvasStyle = args.canvasStyle || {};
       this.background = args.background || "black";
+      this.canvasStyle = args.canvasStyle || {};
 
       Object.keys(this.canvasStyle).forEach((key) => {
         if (typeof this.canvasStyle[key] === "number") {
@@ -24,26 +23,26 @@
         this.canvas.style[key] = this.canvasStyle[key];
       });
 
-      this.stage = new GameEngine.Container();
-
-      requestAnimationFrame((timestamp) => this.tick(timestamp));
     }
 
-    get dispalyObjects() {
-      return this.stage.dispalyObjects;
-    }
+    // get displayObjects() {
+    //   return _getDisplayObjects(this.stage);
 
-    tick(timestamp) {
-      this.update(timestamp);
-      this.clear();
-      this.render();
+    //   function _getDisplayObjects(container, result = []) {
+    //     for (const displayObject of container.displayObjects) {
+    //       if (displayObject instanceof GameEngine.Container) {
+    //         _getDisplayObjects(displayObject, result);
+    //       } else {
+    //         return result.push(displayObject);
+    //       }
+    //     }
+    //   }
+    // }
 
-      requestAnimationFrame((timestamp) => this.tick(timestamp));
-    }
 
-    render() {
-      this.stage.draw(this.canvas, this.ctx);
-    }
+    // render() {
+    //   this.stage.draw(this.canvas, this.ctx);
+    // }
 
     clear() {
       this.ctx.fillStyle = this.background;
