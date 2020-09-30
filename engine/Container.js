@@ -5,22 +5,26 @@
     constructor(args = {}) {
       super(args);
 
-      this.dispalyObjects = [];
+      this.displayObjects = [];
     }
 
-    add(dispalyObject) {
-      if (!this.dispalyObjects.includes(dispalyObject)) {
-        this.dispalyObjects.push(dispalyObject);
-        dispalyObject.setParent(this);
-      }
+    add(...displayObjects) {
+      displayObjects.forEach((displayObject) => {
+        if (!this.displayObjects.includes(displayObject)) {
+          this.displayObjects.push(displayObject);
+          displayObject.setParent(this);
+        }
+      });
     }
 
-    remove(displayObject) {
-      if (this.dispalyObjects.includes(dispalyObject)) {
-        const idx = this.dispalyObjects.indexOf(dispalyObject);
-        this.dispalyObjects.splice(idx, 1);
-        dispalyObject.setParent(null);
-      }
+    remove(...displayObjects) {
+      displayObjects.forEach((displayObject) => {
+        if (this.displayObjects.includes(displayObject)) {
+          const idx = this.displayObjects.indexOf(displayObject);
+          this.displayObjects.splice(idx, 1);
+          displayObject.setParent(null);
+        }
+      });
     }
 
     draw(canvas, context) {
@@ -30,8 +34,8 @@
         context.rotate(this.rotation);
         context.scale(this.scaleX, this.scaleY);
 
-        for (let dispalyObject of this.dispalyObjects) {
-          dispalyObject.draw(canvas, context);
+        for (let displayObject of this.displayObjects) {
+          displayObject.draw(canvas, context);
         }
 
         context.restore();
