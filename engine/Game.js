@@ -8,8 +8,13 @@
       this.scenesCollection = new GameEngine.Container();
       this.primitives = new GameEngine.Primitives();
 
-      this.keyboard = new GameEngine.Keyboard(args.extendKeyboardKeys || {});
-      this.mouse = new GameEngine.Mouse(this.renderer.canvas);
+      // TODO: change, when to use with webpack
+      this.store = {};
+
+      this.devices = {
+        keyboard: new GameEngine.Keyboard(args.extendKeyboardKeys || {}),
+        mouse: new GameEngine.Mouse(this.renderer.canvas),
+      };
 
       if (args.scenes) {
         this.addScenes(...args.scenes);
@@ -61,6 +66,10 @@
 
       for (const scene of startedScenes) {
         scene.update(timestamp);
+      }
+
+      for (const scene of startedScenes) {
+        scene.tick(timestamp);
       }
 
       this.renderer.clear();

@@ -9,7 +9,6 @@
       this.name = args.name || "";
       this.status = "waiting";
       this.stage = this.displayObjects;
-      this.game = null;
 
       if (args.loading) {
         this.loading = args.loading.bind(this);

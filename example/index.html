@@ -5,58 +5,215 @@
     <title>Battle city</title>
   </head>
   <body>
+    
     <script src="../engine/core/Loader.js"></script>
     <script src="../engine/Renderer.js"></script>
-    <script src="../engine/DisplayObject.js"></script>
+    <script src="../engine/core/EventEmitter.js"></script>
+    <script src="../engine/core/DisplayObject.js"></script>
     <script src="../engine/Sprite.js"></script>
     <script src="../engine/Container.js"></script>
+    <script src="../engine/Scene.js"></script>
+    <script src="../engine/core/Keyboard.js"></script>
+    <script src="../engine/core/Mouse.js"></script>
+    <script src="../engine/Body.js"></script>
+    <script src="../engine/Primitives.js"></script>
+    <script src="../engine/Camera.js"></script>
+    <script src="../engine/Game.js"></script>
+    <script src="../engine/Util.js"></script>
+    <script src="../engine/ArcadePhysics.js"></script>
+
+    <script src="../game/Bullet.js"></script>
+    <script src="../game/Tank.js"></script>
+    <script src="../game/index.js"></script>
+
 
     <script>
-      let sprite = null;
-      const { Loader, Renderer, Sprite } = GameEngine;
-      Loader.loadImage("static/persik.png");
+      // // let sprite = null;
+      // // let sprite2 = null;
+      // const { Scene, Game, Sprite, Body, Util, ArcadePhysics } = GameEngine;
+      // let n = 1;
+      // let isSpaced = false;
+      // let space = 0;
 
-      const loader = new Loader();
-      const renderer = new Renderer({
-        width: 500,
-        height: 500,
-        background: "gray",
-        canvasStyle: {
-          border: "5px solid",
-        },
-        update(timestamp) {
-          if (!sprite) {
-            return;
-          }
-          // sprite.x = this.canvas.width / 5 + 100 * Math.cos(timestamp / 100);
-          // sprite.y = this.canvas.height / 5 + 100 * Math.sin(timestamp / 100);
+      // const mainScene = new Scene({
+      //   name: "mainScene",
+      //   autoStart: true,
 
-          // sprite.frame.x =
-          //   this.canvas.width / 4 + 100 * Math.cos(timestamp / 100);
-          // sprite.frame.y =
-          //   this.canvas.height / 4 + 100 * Math.sin(timestamp / 100);
-        },
-      });
+      //   loading(loader) {
+      //     loader.addJson("manAtlas", "static/atlas.json");
+      //     loader.addImage("spriteSheet", "static/spriteSheet.png");
+      //   },
 
-      loader.addImage("persik", "static/persik.png");
-      loader.addJson("presons", "static/persons.json");
-      loader.load(() => {
-        sprite = new Sprite(loader.getImage("persik"), {
-          scale: 0.5,
-          // anchorX: 0.5,
-          // anchorY: 0.5,
-        });
-        sprite.absoluteX = 0;
-        sprite.absoluteY = 0;
-        renderer.stage.add(sprite);
+      //   init() {
 
-        // sprite.width = 400;
-        // sprite.height = 400;
-      });
+      //   },
+      //   update() {
 
-     
-      // Renderer example
-      document.body.append(renderer.canvas);
+      //   }
+
+      //   // init() {
+      //   //   const manAtlas = this.parent.loader.getJson("manAtlas");
+      //   //   const manTexture = this.parent.loader.getImage("spriteSheet");
+
+      //   //   this.arcadePhysics = new ArcadePhysics();
+
+      //   //   this.man1 = new Body(manTexture, {
+      //   //     x: this.parent.renderer.canvas.width / 2 + 100,
+      //   //     y: this.parent.renderer.canvas.height / 2,
+      //   //     anchorX: 0.5,
+      //   //     anchorY: 0.5,
+      //   //     debug: true,
+      //   //     scale: 3,
+      //   //     body: {
+      //   //       x: 0,
+      //   //       y: 0.5,
+      //   //       width: 1,
+      //   //       height: 0.5,
+      //   //     },
+      //   //   });
+
+      //   //   this.man2 = new Body(manTexture, {
+      //   //     x: this.parent.renderer.canvas.width / 2 - 100,
+      //   //     y: this.parent.renderer.canvas.height / 2,
+      //   //     anchorX: 0.5,
+      //   //     anchorY: 0.5,
+      //   //     debug: true,
+      //   //     scale: 3,
+      //   //     body: {
+      //   //       x: 0,
+      //   //       y: 0.5,
+      //   //       width: 1,
+      //   //       height: 0.5,
+      //   //     },
+      //   //   });
+
+      //   //   this.man1.setFramesCollection(manAtlas.frames);
+      //   //   this.man1.setAnimationsCollection(manAtlas.actions);
+
+      //   //   this.man2.setFramesCollection(manAtlas.frames);
+      //   //   this.man2.setAnimationsCollection(manAtlas.actions);
+
+      //   //   //  this.man1.setFrameByKeys("man", "down", "frame-1");
+      //   //   //  this.man1.width =  this.man1.frame.width;
+      //   //   //  this.man1.height =  this.man1.frame.height;
+
+      //   //   // this.camera = new GameEngine.Camera({ width: 300, height: 300 });
+      //   //   // this.camera.watch(this.tank);
+      //   //   this.add(this.man1, this.man2);
+      //   //   this.arcadePhysics.add(this.man1, this.man2);
+
+      //   //   this.man1.on("collision", (a, b) => {
+      //   //     a.startAnimation("stayDown");
+      //   //     a.velocity.x = 0;
+      //   //     a.velocity.y = 0;
+      //   //   });
+      //   // },
+
+      //   // update(timestamp) {
+      //   //   const { keyboard, mouse } = this.parent.devices;
+
+      //   //   // if (Util.delay("manFrameUpdate", 100)) {
+      //   //   //   n = (n % 4) + 1;
+      //   //   //    this.man1.setFrameByKeys("man", "down", "frame-" + n);
+      //   //   // }
+
+      //   //   this.man1.velocity.x = 0;
+      //   //   this.man1.velocity.y = 0;
+
+      //   //   this.man2.velocity.x = 0;
+      //   //   this.man2.velocity.y = 0;
+
+      //   //   // if (
+      //   //   //   mouse.keysEvent.mousedown.x >  this.man1.x -  this.man1.height &&
+      //   //   //   mouse.keysEvent.mousedown.x <  this.man1.x +  this.man1.width &&
+      //   //   //   mouse.keysEvent.mousedown.y >=  this.man1.y - ( this.man1.height +  this.man1.width) + ( this.man1.height / 2) &&
+      //   //   //   mouse.keysEvent.mousedown.y <=  this.man1.y +  this.man1.height +  this.man1.width
+      //   //   // ) {
+      //   //   //    this.man1.x = mouse.keysEvent.mousemove.x;
+      //   //   //    this.man1.y = mouse.keysEvent.mousemove.y;
+
+      //   //   // }
+
+      //   //   if (keyboard.keys.space) {
+      //   //     if (!isSpaced) {
+      //   //       if (space <= 15) {
+      //   //         console.log(this.man1.y);
+      //   //         while (space < 15) {
+      //   //           space++;
+      //   //         }
+      //   //         this.man1.y -= space;
+      //   //       } else {
+      //   //         this.man1.y = this.man1.y + space;
+      //   //       }
+
+      //   //       isSpaced = true;
+      //   //       console.log(this.man1.y, space);
+      //   //     }
+      //   //   } else {
+      //   //     this.man1.y = this.man1.y + space;
+
+      //   //     isSpaced = false;
+      //   //     space = 0;
+      //   //   }
+
+      //   //   if (keyboard.keys.arrowUp) {
+      //   //     this.man1.velocity.y = -5;
+      //   //     if (this.man1.animation !== "moveUp") {
+      //   //       this.man1.startAnimation("moveUp");
+      //   //     }
+      //   //   } else if (keyboard.keys.arrowDown) {
+      //   //     this.man1.velocity.y = 5;
+      //   //     if (this.man1.animation !== "moveDown") {
+      //   //       this.man1.startAnimation("moveDown");
+      //   //     }
+      //   //   } else if (keyboard.keys.arrowLeft) {
+      //   //     this.man1.velocity.x = -5;
+      //   //     if (this.man1.animation !== "moveLeft") {
+      //   //       this.man1.startAnimation("moveLeft");
+      //   //     }
+      //   //   } else if (keyboard.keys.arrowRight) {
+      //   //     this.man1.velocity.x = 5;
+
+      //   //     if (this.man1.animation !== "moveRight") {
+      //   //       this.man1.startAnimation("moveRight");
+      //   //     }
+      //   //   } else if (this.man1.animation !== "stayDown") {
+      //   //     this.man1.startAnimation("stayDown");
+      //   //     this.man2.startAnimation("stayDown");
+      //   //   }
+
+      //   //   this.arcadePhysics.processing();
+      //   // },
+      //   // beforeDestroy() {
+      //   //   delete this.sprite;
+      //   // },
+      // });
+
+      // // const extendKeyboardKeys = {
+      // //   keys: {
+      // //     arrowUp: false,
+      // //     tiDaun: false,
+      // //   },
+      // //   actions: {
+      // //     // ArrowUp(bool) {
+      // //     //   this.keys.arrowUp = bool;
+      // //     // },
+      // //     KeyW: 1
+      // //     // (bool, _self) => {
+      // //     // _self.keys.arrowUp = bool;
+      // //     // return 1
+      // //     // },
+      // //   },
+      // // };
+
+      // const game = new Game({
+      //   el: document.body,
+      //   width: 600,
+      //   height: 600,
+      //   background: "#ccc",
+      //   scenes: [mainScene],
+      //   // extendKeyboardKeys,
+      // });
     </script>
   </body>
 </html>

@@ -13,6 +13,15 @@
         if (!this.displayObjects.includes(displayObject)) {
           this.displayObjects.push(displayObject);
           displayObject.setParent(this);
+        console.log(displayObject)
+        }
+      });
+    }
+
+    tick() {
+      this.displayObjects.forEach((displayObject) => {
+        if (displayObject.tick) {
+          displayObject.tick();
         }
       });
     }

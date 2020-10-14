@@ -5,10 +5,6 @@
         mousedown: {},
         mouseup: {},
         contextmenu: {},
-        click: {},
-        // Движение
-        mouseout: {},
-        mouseover: {},
         mousemove: {},
       };
 

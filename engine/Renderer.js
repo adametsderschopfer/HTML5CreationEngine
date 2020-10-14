@@ -9,7 +9,7 @@
     constructor(args = {}) {
       this.canvas = document.createElement("canvas");
       this.ctx = this.canvas.getContext("2d");
-
+  
       this.canvas.width = args.width || 50;
       this.canvas.height = args.height || 50;
       this.background = args.background || "black";
