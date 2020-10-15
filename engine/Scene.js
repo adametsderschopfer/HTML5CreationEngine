@@ -1,39 +1,36 @@
-(() => {
-  "use strict";
+import Container from "./Container";
 
-  class Scene extends GameEngine.Container {
-    constructor(args = {}) {
-      super();
+class Scene extends Container {
+  constructor(args = {}) {
+    super();
 
-      this.autoStart = args.autoStart || false;
-      this.name = args.name || "";
-      this.status = "waiting";
-      this.stage = this.displayObjects;
+    this.autoStart = args.autoStart || false;
+    this.name = args.name || "";
+    this.status = "waiting";
+    this.stage = this.displayObjects;
 
-      if (args.loading) {
-        this.loading = args.loading.bind(this);
-      }
-
-      if (args.init) {
-        this.init = args.init.bind(this);
-      }
-
-      if (args.update) {
-        this.update = args.update.bind(this);
-      }
-
-      if (args.beforeDestroy) {
-        this.beforeDestroy = args.beforeDestroy.bind(this);
-      }
+    if (args.loading) {
+      this.loading = args.loading.bind(this);
     }
 
-    loading() {}
-    init() {}
-    update() {}
+    if (args.init) {
+      this.init = args.init.bind(this);
+    }
 
-    beforeDestroy() {}
+    if (args.update) {
+      this.update = args.update.bind(this);
+    }
+
+    if (args.beforeDestroy) {
+      this.beforeDestroy = args.beforeDestroy.bind(this);
+    }
   }
 
-  window.GameEngine = window.GameEngine || {};
-  window.GameEngine.Scene = Scene;
-})();
+  loading() {}
+  init() {}
+  update() {}
+
+  beforeDestroy() {}
+}
+
+export default Scene;

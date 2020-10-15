@@ -27,3 +27,5 @@ class AuxiliaryFunctionsForStore extends Singletone {
     };
   }
 }
+
+export { AuxiliaryFunctionsForStore };

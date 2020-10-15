@@ -1,13 +1,13 @@
-import auxiliary from "./Auxiliary";
+import { AuxiliaryFunctionsForStore } from "./Auxiliary";
 
-class Dispatcher extends auxiliary.AuxiliaryFunctionsForStore {
+class Dispatcher extends AuxiliaryFunctionsForStore {
   constructor() {
     super();
   }
 
   dispatch(action) {
     if (typeof action === "function") {
-      return action(this.dispatch)
+      return action(this.dispatch);
     }
 
     this.state = this.reducer(this.state, action);

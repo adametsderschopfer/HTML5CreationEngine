@@ -1,50 +1,47 @@
-(() => {
-  class EventEmitter {
-    constructor() {
-      this.handlers = {};
+class EventEmitter {
+  constructor() {
+    this.handlers = {};
+  }
+
+  on(...args) {
+    this.#addEventListener(...args);
+  }
+
+  off(...args) {
+    this.#removeEventListener(...args);
+  }
+
+  #addEventListener(name, handler) {
+    if (!this.handlers.hasOwnProperty(name)) {
+      this.handlers[name] = [];
     }
 
-    on(...args) {
-      this.#addEventListener(...args);
-    }
+    this.handlers[name].push(handler);
+  }
 
-    off(...args) {
-      this.#removeEventListener(...args);
-    }
+  #removeEventListener(name = null, handler = null) {
+    if (this.handlers.hasOwnProperty(name)) {
+      delete this.handlers[name];
 
-    #addEventListener(name, handler) {
-      if (!this.handlers.hasOwnProperty(name)) {
-        this.handlers[name] = [];
-      }
+      return handler();
+    } else {
+      const _error = new SyntaxError(`Handler by name { ${name} } not found`);
 
-      this.handlers[name].push(handler);
-    }
-
-    #removeEventListener(name = null, handler = null) {
-      if (this.handlers.hasOwnProperty(name)) {
-        delete this.handlers[name];
-
-        return handler();
-      } else {
-        const _error = new SyntaxError(`Handler by name { ${name} } not found`);
-
-        return handler(_error);
-      }
-    }
-
-    emit(name, ...args) {
-      if (!this.handlers.hasOwnProperty(name)) {
-        return false;
-      }
-
-      for (const handler of this.handlers[name]) {
-        handler(...args);
-      }
-
-      return true;
+      return handler(_error);
     }
   }
 
-  window.GameEngine = window.GameEngine || {};
-  window.GameEngine.EventEmitter = EventEmitter;
-})();
+  emit(name, ...args) {
+    if (!this.handlers.hasOwnProperty(name)) {
+      return false;
+    }
+
+    for (const handler of this.handlers[name]) {
+      handler(...args);
+    }
+
+    return true;
+  }
+}
+
+export default EventEmitter;

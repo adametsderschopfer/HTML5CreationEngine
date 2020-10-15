@@ -23,4 +23,6 @@ function createStore(reducer, initialState) {
 
 const { combineReducers } = Store;
 
-export { combineReducers, createStore };
+export { combineReducers, createStore }
+
+export default Store;

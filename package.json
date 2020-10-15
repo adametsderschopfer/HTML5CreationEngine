@@ -1,11 +1,13 @@
 {
   "name": "html5creationengine",
   "version": "1.0.0",
-  "description": "Engine on javascript",
+  "description": "Html canvas game engine",
+  "main": "GameEngine.js",
+  "directories": {
+    "example": "example"
+  },
   "scripts": {
-    "test": "jest",
     "serve": "webpack-dev-server --mode development",
-    "nodemon": "nodemon --exec babel-node server.js",
     "build": "webpack --mode production"
   },
   "repository": {
@@ -14,8 +16,15 @@
   },
   "keywords": [
     "js",
+    "game",
     "engine"
   ],
+  "author": "Adametsofficial",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adametsofficial/HTML5CreationEngine/issues"
+  },
+  "homepage": "https://github.com/adametsofficial/HTML5CreationEngine#readme",
   "devDependencies": {
     "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",
@@ -28,10 +37,8 @@
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.9.0"
   },
-  "author": "Adametsofficial <av.styledev@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/adametsofficial/HTML5CreationEngine/issues"
-  },
-  "homepage": "https://github.com/adametsofficial/HTML5CreationEngine#readme"
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-private-methods": "^7.10.4"
+  }
 }
